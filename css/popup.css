@@ -37,12 +37,12 @@
       display: none;
       position: fixed;
       
-      max-width: 430px;
+      max-width: 550px;
+      width: 95%;
       height: 400px;
       top: 50%;
-      left: 60%;
-      margin-left: -260px;
-      margin-top: -180px;
+      left: 50%;
+      margin: 50px auto; 
       background-color: #efefef;
       border: 2px solid #333;
       z-index: 102;
