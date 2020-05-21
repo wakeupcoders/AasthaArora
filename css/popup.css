@@ -5,8 +5,8 @@
     margin: 15vh;
   }  
 
-  @media only screen and (max-width: 600px) {
-    .popupBoxWrapper{
+  @media only screen and (max-width: 300px) {
+    .delayedPopupWindow{
         width:100%;
      }
    }
