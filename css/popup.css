@@ -42,7 +42,8 @@
       height: 400px;
       top: 50%;
       left: 50%;
-      margin: 50px auto; 
+      margin-left: -260px;
+      margin-top: -180px;
       background-color: #efefef;
       border: 2px solid #333;
       z-index: 102;
