@@ -30,7 +30,7 @@
   .delayedPopupWindow {
       display: none;
       position: fixed;
-      width: auto;
+      
       max-width: 430px;
       height: 400px;
       top: 50%;
