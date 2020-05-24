@@ -6,6 +6,9 @@ function send() {
     var subject = document.getElementById("subject").value;
     var message = document.getElementById("message").value;
 
+    var Actualmessage=name+" is trying to connect with you\n "+"Email: "+email+"\n"+"Phone: "+phone+"\n"+"Message: "+message+"\n";
+    message=Actualmessage;
+
     if (navigator.onLine) {
       var formData = { To: "iotapp420@gmail.com", Name: name, Phone: phone, Email: email, Subject: subject, Message: message }
       $('#cover-spin').show(30)
