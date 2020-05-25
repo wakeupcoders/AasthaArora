@@ -6,8 +6,6 @@ function send() {
   var subject = document.getElementById("subject").value;
   var message = document.getElementById("message").value;
 
-
-
   //Regex Patterns
   var phonepatt = new RegExp(/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/);
   var emailpatt = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
@@ -52,7 +50,7 @@ function send() {
       $('#cover-spin').show(30)
       //initiate the ajax request
       $.ajax({
-        url: "https://warm-refuge-56194.herokuapp.com/email",
+        url: "https://contact247.herokuapp.com/email",
         type: "POST",
         data: formData,
         success: function (data, textStatus, jqXHR) {
