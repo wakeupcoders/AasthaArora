@@ -10,6 +10,9 @@ function send() {
   var phonepatt = new RegExp(/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/);
   var emailpatt = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
 
+
+
+  if (navigator.onLine) {
   //data validation start here
   if (name == "") {
     validationmessage("Name");
@@ -37,15 +40,13 @@ function send() {
   }
 
   // if data is valid go for it here.
-
-
   else {
 
     var Actualmessage = name + " is trying to connect with you\n " + "Email: " + email + "\n" + "Phone: " + phone + "\n" + "Message: " + message + "\n";
     message = Actualmessage;
 
     //check weathere is there any internet connection or not 
-    if (navigator.onLine) {
+    
       var formData = { To: "twcbyaasthaarora@gmail.com", Name: name, Phone: phone, Email: email, Subject: subject, Message: message }
       $('#cover-spin').show(30)
       //initiate the ajax request
@@ -60,7 +61,7 @@ function send() {
           if (data.Status == '1') {
             clearbox();
             Swal.fire({
-              icon: 'success',
+              type: 'success',
               title: 'Thanks for contacting us.',
               text: 'Your message has been sent. Soon! Someone from our team will get back to you.',
               confirmButtonColor: '#7cbd1e'
@@ -70,7 +71,7 @@ function send() {
           else {
 
             Swal.fire({
-              icon: 'error',
+              type: 'error',
               title: 'Oops...',
               text: 'Something went wrong. Please try again later',
               confirmButtonColor: '#7cbd1e'
@@ -82,7 +83,7 @@ function send() {
         error: function (jqXHR, textStatus, errorThrown) {
           //On error code here...
           Swal.fire({
-            icon: 'error',
+            type: 'error',
             title: 'Oops...',
             text: 'Something went wrong. Please try again later',
             confirmButtonColor: '#7cbd1e'
@@ -93,17 +94,22 @@ function send() {
 
 
 
-    } else {
-      Swal.fire(
-        'The Internet?',
-        'That thing is still around?',
-        'question'
-      )
-
-    }
+    
+    
+    
+   
 
   }
+}
+else{
 
+  Swal.fire({
+    type: 'question',
+    title: 'The Internet?',
+    text: 'That thing is still around?',
+    confirmButtonColor: '#7cbd1e'
+  })
+}
 
 }
 
@@ -122,7 +128,7 @@ function clearbox() {
 //function for validation popup message
 function validationmessage(msg) {
   Swal.fire({
-    icon: 'error',
+    type: 'error',
     title: 'Oops...',
     text: msg + ' is not valid ' + 'Please provide valid ' + msg,
     confirmButtonColor: '#7cbd1e'
