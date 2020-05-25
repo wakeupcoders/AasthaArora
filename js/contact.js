@@ -59,11 +59,12 @@ function send() {
           console.log(data.Status);
           if (data.Status == '1') {
             clearbox();
-            Swal.fire(
-              'Thanks for contacting us.',
-              'Your message has been sent. Soon! Someone from our team will get back to you.',
-              'success'
-            )
+            Swal.fire({
+              icon: 'success',
+              title: 'Thanks for contacting us.',
+              text: 'Your message has been sent. Soon! Someone from our team will get back to you.',
+              confirmButtonColor: '#7cbd1e'
+            })
 
           }
           else {
@@ -71,7 +72,8 @@ function send() {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong. Please try again later'
+              text: 'Something went wrong. Please try again later',
+              confirmButtonColor: '#7cbd1e'
             })
 
           }
@@ -82,7 +84,8 @@ function send() {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong. Please try again later'
+            text: 'Something went wrong. Please try again later',
+            confirmButtonColor: '#7cbd1e'
           })
           $('#cover-spin').hide(30);
         }
@@ -121,7 +124,60 @@ function validationmessage(msg) {
   Swal.fire({
     icon: 'error',
     title: 'Oops...',
-    text: msg + ' is not valid ' + 'Please provide valid ' + msg
+    text: msg + ' is not valid ' + 'Please provide valid ' + msg,
+    confirmButtonColor: '#7cbd1e'
   })
+
+}
+
+
+//function for Newsletter
+function subscribe() {
+
+  var newsletteremail = document.getElementById('newsletteremail').value;
+  var endpointurl = "https://script.google.com/macros/s/AKfycbxHcCqC7GB6XGFEh2ipHbjD-PMn5yPRIiuAtGwPVzkyIvPCsPeZ/exec?func=addData&email=" + newsletteremail;
+
+  var emailpatt = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
+
+  if (newsletteremail == "" || emailpatt.test(newsletteremail) == false) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Email is not valid, Please provide the valid email',
+      confirmButtonColor: '#7cbd1e'
+    })
+
+  }
+  else {
+    $('#cover-spin').show(30);
+    $.ajax({
+      type: 'GET',
+      url: endpointurl,
+      success: function (data) {
+
+        if (data.status == true) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Newsletter Subscribed successfully!!! for ' + data.email,
+            text: 'All the latest content from Aastha Arora will be dropped directly to your inbox.',
+            confirmButtonColor: '#7cbd1e'
+          })
+         
+          document.getElementById('newsletteremail').value = '';
+          $('#cover-spin').hide(30);
+        }
+        else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong. Please try again later',
+            confirmButtonColor: '#7cbd1e'
+          })
+
+        }
+      }
+
+    });
+  }
 
 }
