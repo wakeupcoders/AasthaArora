@@ -46,7 +46,7 @@ function send() {
 
     //check weathere is there any internet connection or not 
     if (navigator.onLine) {
-      var formData = { To: "iotapp420@gmail.com", Name: name, Phone: phone, Email: email, Subject: subject, Message: message }
+      var formData = { To: "twcbyaasthaarora@gmail.com", Name: name, Phone: phone, Email: email, Subject: subject, Message: message }
       $('#cover-spin').show(30)
       //initiate the ajax request
       $.ajax({
