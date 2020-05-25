@@ -1,23 +1,62 @@
 function send() {
 
-    var name = document.getElementById("name").value;
-    var phone = document.getElementById("phone").value;
-    var email = document.getElementById("email").value;
-    var subject = document.getElementById("subject").value;
-    var message = document.getElementById("message").value;
+  var name = document.getElementById("name").value;
+  var phone = document.getElementById("phone").value;
+  var email = document.getElementById("email").value;
+  var subject = document.getElementById("subject").value;
+  var message = document.getElementById("message").value;
 
-    var Actualmessage=name+" is trying to connect with you\n "+"Email: "+email+"\n"+"Phone: "+phone+"\n"+"Message: "+message+"\n";
-    message=Actualmessage;
 
+
+  //Regex Patterns
+  var phonepatt = new RegExp(/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/);
+  var emailpatt = new RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
+
+  //data validation start here
+  if (name == "") {
+    validationmessage("Name");
+
+
+  }
+
+  else if (phone == "" || phonepatt.test(phone) == false) {
+    validationmessage("Phone no");
+
+  }
+
+  else if (email == "" || emailpatt.test(email) == false) {
+    validationmessage("Email");
+
+  }
+
+  else if (subject == "") {
+    validationmessage("Subject");
+
+  }
+
+  else if (message == "") {
+    validationmessage("Your Message");
+  }
+
+  // if data is valid go for it here.
+
+
+  else {
+
+    var Actualmessage = name + " is trying to connect with you\n " + "Email: " + email + "\n" + "Phone: " + phone + "\n" + "Message: " + message + "\n";
+    message = Actualmessage;
+
+    //check weathere is there any internet connection or not 
     if (navigator.onLine) {
       var formData = { To: "iotapp420@gmail.com", Name: name, Phone: phone, Email: email, Subject: subject, Message: message }
       $('#cover-spin').show(30)
-
+      //initiate the ajax request
       $.ajax({
         url: "https://warm-refuge-56194.herokuapp.com/email",
         type: "POST",
         data: formData,
         success: function (data, textStatus, jqXHR) {
+          //On success code here...
           //data - response from server
           console.log(data.Status);
           if (data.Status == '1') {
@@ -30,7 +69,7 @@ function send() {
 
           }
           else {
-            clearbox();
+
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -41,7 +80,7 @@ function send() {
           $('#cover-spin').hide(30);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          clearbox();
+          //On error code here...
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -54,23 +93,37 @@ function send() {
 
 
     } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'You are not connected with internet.'
+      Swal.fire(
+        'The Internet?',
+        'That thing is still around?',
+        'question'
+      )
 
-      })
-      clearbox();
     }
 
   }
 
 
-  function clearbox() {
-    document.getElementById("name").value = '';
-    document.getElementById("phone").value = '';
-    document.getElementById("email").value = '';
-    document.getElementById("subject").value = '';
-    document.getElementById("message").value = '';
+}
 
-  }
+//function for clearing the textbox after successful message drop
+
+
+function clearbox() {
+  document.getElementById("name").value = '';
+  document.getElementById("phone").value = '';
+  document.getElementById("email").value = '';
+  document.getElementById("subject").value = '';
+  document.getElementById("message").value = '';
+
+}
+
+//function for validation popup message
+function validationmessage(msg) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: msg + ' is not valid ' + 'Please provide valid ' + msg
+  })
+
+}
