@@ -7,3 +7,6 @@ sweetalert2 Popup
 
 Contact us form:
 Contact247 Service by wakeupcoders
+
+Newsletter form:
+Google Spreadsheet connected
