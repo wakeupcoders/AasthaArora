@@ -1,0 +1,6 @@
+user_agent:*
+
+
+disallow:
+
+sitemap:https://aasthaarora.com/sitemap.xml
