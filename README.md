@@ -9,4 +9,4 @@ Contact us form:
 Contact247 Service by wakeupcoders
 
 Newsletter form:
-Google Spreadsheet connected
+Google Spreadsheet connected 
